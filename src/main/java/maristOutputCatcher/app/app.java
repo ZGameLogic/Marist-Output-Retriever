@@ -1,8 +1,8 @@
-package merristOutputCatcher.app;
+package maristOutputCatcher.app;
 
 import java.io.IOException;
 
-import merristOutputCatcher.FTP.ftp;
+import maristOutputCatcher.FTP.ftp;
 
 public class app {
 	

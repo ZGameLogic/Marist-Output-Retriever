@@ -1,4 +1,4 @@
-package merristOutputCatcher.FTP;
+package maristOutputCatcher.FTP;
 
 import java.io.File;
 import java.io.FileOutputStream;
