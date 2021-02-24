@@ -54,7 +54,7 @@ public class ftp {
 		// This next line can be un-commented for debug purposes
 		// ftp.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(new File("Debug.txt"))));
 
-		System.out.print("Connecting to Merrist...");
+		System.out.print("Connecting to Marist...");
 		// connect to ftp server
 		ftp.connect(SERVER, PORT);
 
