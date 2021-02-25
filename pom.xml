@@ -62,7 +62,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>app.app</mainClass>
+							<mainClass>maristOutputCatcher.app.app</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
