@@ -147,6 +147,7 @@ public class ftp {
 		}
 
 		// ending program
+		System.out.println("Remember to check the output documents before submitting!");
 		System.out.println("Press enter to exit");
 		kb.nextLine();
 		kb.close();
