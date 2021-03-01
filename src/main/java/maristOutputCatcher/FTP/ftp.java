@@ -3,6 +3,7 @@ package maristOutputCatcher.FTP;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -96,8 +97,36 @@ public class ftp {
 									new FileOutputStream(files[Integer.parseInt(x) - 1].getName() + ".txt"));
 							System.out.println("Downloaded " + files[Integer.parseInt(x) - 1].getName());
 							
-							// TODO add output formatting
+							System.out.print("Formatting...");
+							// File that needs to be formatted
+							File toFormatt = new File(files[Integer.parseInt(x) - 1].getName() + ".txt");
 							
+							String formattedFile = "";
+							
+							Scanner fileInput = new Scanner(toFormatt);
+							
+							String inputLine;
+							
+							while(fileInput.hasNextLine() && (inputLine = fileInput.nextLine()) != null){
+								if(inputLine.startsWith("0")) {
+									formattedFile += "\n" + inputLine.replaceFirst("0", "") + "\n";
+								}else if(inputLine.startsWith("1")) {
+									formattedFile += "\f\n" + inputLine.replaceFirst("1", "") + "\n";
+								}else if(inputLine.startsWith("-")) {
+									formattedFile += "\n\n" + inputLine.replaceFirst("-", "") + "\n";
+								}else {
+									formattedFile += inputLine + "\n";
+								}
+							}
+							
+							fileInput.close();
+							
+							PrintWriter output = new PrintWriter(toFormatt);
+							output.print(formattedFile);
+							output.flush();
+							output.close();
+							
+							System.out.println("Formatted");
 						} catch (NumberFormatException e) {
 							System.out.println(x + " is not a valid number");
 						} catch (ArrayIndexOutOfBoundsException e1) {
