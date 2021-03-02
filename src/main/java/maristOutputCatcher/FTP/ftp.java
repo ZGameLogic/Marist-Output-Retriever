@@ -1,5 +1,6 @@
 package maristOutputCatcher.FTP;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -46,8 +47,16 @@ public class ftp {
 			// Prompt user for log on information
 			System.out.print("KcID:");
 			username = kb.nextLine();
-			System.out.print("Password:");
-			password = kb.nextLine();
+			
+			Console console = System.console();
+			
+			if(console == null) {
+				System.out.println("No console instance");
+			}else {
+				console.printf("Password:");
+				char[] passwordArray = console.readPassword();
+				password = new String(passwordArray);
+			}
 		}
 
 		ftp = new FTPClient();
