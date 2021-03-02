@@ -89,6 +89,7 @@ public class ftp {
 				// Change the site to look for jes files (the output files)
 				ftp.site("filetype=jes");
 				
+				// Retrieve the list of files
 				FTPFile[] files = ftp.listFiles();
 				
 				System.out.println("retrieved");
