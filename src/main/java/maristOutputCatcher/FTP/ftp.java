@@ -84,13 +84,15 @@ public class ftp {
 				// we get here if we login 
 				System.out.println("logged in");
 				// retrieving 
-				System.out.println("Retrieving jobs");
-				System.out.println();
+				System.out.print("Retrieving jobs...");
 				
 				// Change the site to look for jes files (the output files)
 				ftp.site("filetype=jes");
 				
 				FTPFile[] files = ftp.listFiles();
+				
+				System.out.println("retrieved");
+				System.out.println();
 
 				if (files.length > 0) {
 					// we get here if there are output files
