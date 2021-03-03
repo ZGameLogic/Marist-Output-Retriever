@@ -27,6 +27,8 @@ public class ftp {
 	private FTPClient ftp;
 
 	public void open() throws IOException {
+		
+		System.out.println("Starting Marist job downloader\nBy Ben Shabowski\n");
 
 		// keyboard input
 		Scanner kb = new Scanner(System.in);
