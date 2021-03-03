@@ -127,6 +127,7 @@ public class ftp {
 							
 							String inputLine;
 							
+							// format the file
 							while(fileInput.hasNextLine() && (inputLine = fileInput.nextLine()) != null){
 								if(inputLine.startsWith("0")) {
 									formattedFile += "\n " + inputLine.replaceFirst("0", "") + "\n";
