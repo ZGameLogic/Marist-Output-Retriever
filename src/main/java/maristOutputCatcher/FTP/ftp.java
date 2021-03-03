@@ -79,6 +79,8 @@ public class ftp {
 			System.out.println("connected");
 
 			System.out.print("Logging in...");
+			
+			ftp.enterLocalPassiveMode();
 
 			if (ftp.login(username, password)) {
 				// we get here if we login 
