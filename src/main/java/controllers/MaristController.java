@@ -142,6 +142,8 @@ public class MaristController {
 					for (int i = 0; i < files.length; i++) {
 						jobsList.getItems().add(new Job(files[i].getName()));
 					}
+				} else {
+					jobsList.getItems().add(new Job("NO JOBS IN THE OUTPUT QUEUE"));
 				}
 
 			} catch (IOException e) {
@@ -173,7 +175,8 @@ public class MaristController {
     @FXML
     void download(ActionEvent event) {
     	if (loggedIn) {
-    		if(jobsList.getSelectionModel().getSelectedItem() != null) {
+    		if(jobsList.getSelectionModel().getSelectedItem() != null 
+    				&& !jobsList.getSelectionModel().getSelectedItem().getJobName().equals("NO JOBS IN THE OUTPUT QUEUE")) {
     		String fileName = jobsList.getSelectionModel().getSelectedItem().getJobName();
     		// download the file
 			try {
