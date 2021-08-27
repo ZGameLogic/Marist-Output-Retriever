@@ -130,11 +130,11 @@ public class ftp {
 							// format the file
 							while(fileInput.hasNextLine() && (inputLine = fileInput.nextLine()) != null){
 								if(inputLine.startsWith("0")) {
-									formattedFile += "\n " + inputLine.replaceFirst("0", "") + "\n";
+									formattedFile += "\n" + inputLine.replaceFirst("0", "") + "\n";
 								}else if(inputLine.startsWith("1")) {
-									formattedFile += "\f\n " + inputLine.replaceFirst("1", "") + "\n";
+									formattedFile += "\f\n" + inputLine.replaceFirst("1", "") + "\n";
 								}else if(inputLine.startsWith("-")) {
-									formattedFile += "\n\n " + inputLine.replaceFirst("-", "") + "\n";
+									formattedFile += "\n\n" + inputLine.replaceFirst("-", "") + "\n";
 								}else {
 									formattedFile += inputLine + "\n";
 								}
