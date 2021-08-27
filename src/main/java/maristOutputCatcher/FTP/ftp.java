@@ -28,7 +28,7 @@ public class ftp {
 
 	public void open() throws IOException {
 		
-		System.out.println("Starting Marist job downloader\nBy Ben Shabowski\n");
+		System.out.println("MARIST JOB OUTPUT RETRIEVER\tby Ben Shabowski\n");
 
 		// keyboard input
 		Scanner kb = new Scanner(System.in);
@@ -44,10 +44,13 @@ public class ftp {
 			password = input.nextLine();
 			input.close();
 		} else {
-			System.out.println("Did not find user information.\n"
-					+ "To skip this step in the future, make a file called userinfo.txt and put your KcID on the first line and password on the second line.");
+			System.out.println("TO SKIP HAVING TO ENTER KC-ID AND PASSWORD EACH TIME, \r\n" + 
+					"SAVE THEM IN A FILE NAMED userinfo.txt IN THE SAME \r\n" + 
+					"FOLDER AS THIS PROGRAM WITH YOUR KC-ID ON THE FIRST \r\n" + 
+					"LINE AND YOUR PASSWORD ON THE SECOND!\r\n" + 
+					"");
 			// Prompt user for log on information
-			System.out.print("KcID:");
+			System.out.print("ENTER KC-ID:");
 			username = kb.nextLine();
 			
 			Console console = System.console();
@@ -55,7 +58,7 @@ public class ftp {
 			if(console == null) {
 				System.out.println("No console instance");
 			}else {
-				console.printf("Password:");
+				console.printf("ENTER PASSWORD:");
 				char[] passwordArray = console.readPassword();
 				password = new String(passwordArray);
 			}
