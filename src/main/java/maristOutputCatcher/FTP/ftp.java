@@ -135,6 +135,8 @@ public class ftp {
 									formattedFile += "\f\n" + inputLine.replaceFirst("1", "") + "\n";
 								}else if(inputLine.startsWith("-")) {
 									formattedFile += "\n\n" + inputLine.replaceFirst("-", "") + "\n";
+								}else if(inputLine.startsWith(" ")) {
+									formattedFile += inputLine.replaceFirst(" ", "") + "\n";
 								}else {
 									formattedFile += inputLine + "\n";
 								}
