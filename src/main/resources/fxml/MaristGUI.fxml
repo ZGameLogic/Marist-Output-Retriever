@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="813.0" stylesheets="@../css/NIU.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MaristController">
+   <children>
+      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="443.0" prefWidth="503.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="Jobs">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="414.0" prefWidth="469.0">
+                     <children>
+                        <ScrollPane focusTraversable="false" prefHeight="416.0" prefWidth="503.0">
+                           <content>
+                              <ListView fx:id="jobsList" focusTraversable="false" prefHeight="410.0" prefWidth="499.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab closable="false" text="Log">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane focusTraversable="false" prefHeight="419.0" prefWidth="503.0">
+                           <content>
+                              <VBox fx:id="logVBox" prefHeight="413.0" prefWidth="499.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a7abae" height="263.0" layoutX="533.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="270.0" />
+      <TextField fx:id="idTF" layoutX="553.0" layoutY="71.0" prefHeight="25.0" prefWidth="230.0" promptText="KC-ID" />
+      <Button focusTraversable="false" layoutX="645.0" layoutY="159.0" mnemonicParsing="false" onAction="#login" text="Login" />
+      <PasswordField fx:id="passwordF" layoutX="553.0" layoutY="114.0" prefHeight="25.0" prefWidth="230.0" promptText="PASSWORD" />
+      <Label layoutX="553.0" layoutY="29.0" text="Login to Marist">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="saveCB" focusTraversable="false" layoutX="579.0" layoutY="194.0" mnemonicParsing="false" text="Save username and password" />
+      <Label layoutX="553.0" layoutY="238.0" text="Status:" />
+      <Label fx:id="statusLabel" layoutX="600.0" layoutY="238.0" text="Not logged in" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a7abae" height="162.0" layoutX="533.0" layoutY="294.0" stroke="BLACK" strokeType="INSIDE" width="270.0" />
+      <Label layoutX="543.0" layoutY="313.0" text="Jobs">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button focusTraversable="false" layoutX="627.0" layoutY="326.0" mnemonicParsing="false" onAction="#refreshJobs" text="Refresh Jobs" />
+      <Button focusTraversable="false" layoutX="623.0" layoutY="401.0" mnemonicParsing="false" onAction="#deleteAllJobs" text="Delete all jobs" />
+      <Button focusTraversable="false" layoutX="602.0" layoutY="363.0" mnemonicParsing="false" onAction="#download" text="Download and format" />
+   </children>
+</AnchorPane>

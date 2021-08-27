@@ -20,6 +20,12 @@
 			<artifactId>maven-model</artifactId>
 			<version>3.3.9</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -62,7 +68,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>maristOutputCatcher.app.app</mainClass>
+							<mainClass>application.App</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
