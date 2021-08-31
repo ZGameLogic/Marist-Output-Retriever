@@ -214,6 +214,8 @@ public class MaristController {
 				output.flush();
 				output.close();
 				
+				log("File has been downloaded and saved to:\n" + toFormatt.getAbsolutePath());
+				
 				Stage alertStage = new Stage();
 				FXMLLoader fxmlLoader = new FXMLLoader();
 				AnchorPane newPane = fxmlLoader
