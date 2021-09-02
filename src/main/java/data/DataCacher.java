@@ -7,6 +7,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Abstracted class from other projects to serialize data.
+ * This helps us store the username and password in more than just a simple text file
+ * @see data.User.java
+ * @author Ben Shabowski
+ * @since 1.0
+ *
+ */
 public class DataCacher {
 	
 	/**
@@ -40,7 +48,7 @@ public class DataCacher {
 	/**
 	 * Loads the object from file path that has been given 
 	 * @param filePath File path to load object from
-	 * @return
+	 * @return Object
 	 * @throws ClassNotFoundException 
 	 * @throws IOException 
 	 */

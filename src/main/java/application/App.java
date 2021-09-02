@@ -9,6 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Marist output catcher connects to the Marist file server,
+ * downloads selected jobs, and formats them for submission
+ * @author Ben Shabowski
+ *
+ */
 public class App extends Application {
 
 	public static void main(String[] args) {
@@ -17,10 +23,13 @@ public class App extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException  {
+		// Main pane for JavaFX application
 		AnchorPane mainPane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MaristGUI.fxml"));
 		
+		// Main scene for JavaFX application
 		Scene mainScene = new Scene(mainPane);
 		
+		// Set the style sheet programmatically. This is done in the FXML as well, but this is here to ensure it works 
 		mainScene.getStylesheets().add(getClass().getClassLoader().getResource("css/NIU.css").toString());
 		
 		primaryStage.setScene(mainScene);

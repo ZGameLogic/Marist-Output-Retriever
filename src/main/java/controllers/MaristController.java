@@ -26,16 +26,26 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for main application
+ * 
+ * @author Ben Shabowski
+ * @since 1.0
+ *
+ */
 public class MaristController {
 
-	final private String SERVER = "zos.kctr.marist.edu";
-	final private int PORT = 21;
+	// Server address
+	final private static String SERVER = "zos.kctr.marist.edu";
+	// Server port
+	final private static int PORT = 21;
+	// FTP file connection
 	private FTPClient ftp;
 
 	private boolean loggedIn;
 
-    @FXML
-    private ListView<Job> jobsList;
+	@FXML
+	private ListView<Job> jobsList;
 
 	@FXML
 	private VBox logVBox;
@@ -52,6 +62,11 @@ public class MaristController {
 	@FXML
 	private Label statusLabel;
 
+	/**
+	 * Login to Marist
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void login(ActionEvent event) {
 		new Thread(() -> {
@@ -100,11 +115,13 @@ public class MaristController {
 		}).start();
 	}
 
+	/**
+	 * Method that gets run after JavaFX starts
+	 */
 	@FXML
 	public void initialize() {
 		loggedIn = false;
 		// Initial logging
-
 		log("MARIST JOB OUTPUT RETRIEVER\tby Ben Shabowski");
 
 		File userFile = new File("userinfo");
@@ -125,6 +142,11 @@ public class MaristController {
 		}
 	}
 
+	/**
+	 * Refresh the job list from Marist
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void refreshJobs(ActionEvent event) {
 		if (loggedIn) {
@@ -154,6 +176,11 @@ public class MaristController {
 		}
 	}
 
+	/**
+	 * purge all jobs from Marist
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void deleteAllJobs(ActionEvent event) {
 		if (loggedIn) {
@@ -171,73 +198,80 @@ public class MaristController {
 			log("Cannot delete jobs: You are not logged in!");
 		}
 	}
-	
-    @FXML
-    void download(ActionEvent event) {
-    	if (loggedIn) {
-    		if(jobsList.getSelectionModel().getSelectedItem() != null 
-    				&& !jobsList.getSelectionModel().getSelectedItem().getJobName().equals("NO JOBS IN THE OUTPUT QUEUE")) {
-    		String fileName = jobsList.getSelectionModel().getSelectedItem().getJobName();
-    		// download the file
-			try {
-				FileOutputStream out = new FileOutputStream(fileName + ".txt");
-				ftp.retrieveFile(fileName, out);
-				out.close();
-				// File that needs to be formatted
-				File toFormatt = new File(fileName + ".txt");
-				
-				String formattedFile = "";
-				
-				Scanner fileInput = new Scanner(toFormatt);
-				
-				String inputLine;
-				
-				// format the file
-				while(fileInput.hasNextLine() && (inputLine = fileInput.nextLine()) != null){
-					if(inputLine.startsWith("0")) {
-						formattedFile += "\n" + inputLine.replaceFirst("0", "") + "\n";
-					}else if(inputLine.startsWith("1")) {
-						formattedFile += "\f\n" + inputLine.replaceFirst("1", "") + "\n";
-					}else if(inputLine.startsWith("-")) {
-						formattedFile += "\n\n" + inputLine.replaceFirst("-", "") + "\n";
-					}else if(inputLine.startsWith(" ")) {
-						formattedFile += inputLine.replaceFirst(" ", "") + "\n";
-					}else {
-						formattedFile += inputLine + "\n";
+
+	/**
+	 * Download and format selected job from Marist
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void download(ActionEvent event) {
+		if (loggedIn) {
+			if (jobsList.getSelectionModel().getSelectedItem() != null && !jobsList.getSelectionModel()
+					.getSelectedItem().getJobName().equals("NO JOBS IN THE OUTPUT QUEUE")) {
+				String fileName = jobsList.getSelectionModel().getSelectedItem().getJobName();
+				// download the file
+				try {
+					FileOutputStream out = new FileOutputStream(fileName + ".txt");
+					ftp.retrieveFile(fileName, out);
+					out.close();
+					// File that needs to be formatted
+					File toFormatt = new File(fileName + ".txt");
+
+					String formattedFile = "";
+
+					Scanner fileInput = new Scanner(toFormatt);
+
+					String inputLine;
+
+					// format the file
+					while (fileInput.hasNextLine() && (inputLine = fileInput.nextLine()) != null) {
+						if (inputLine.startsWith("0")) {
+							formattedFile += "\n" + inputLine.replaceFirst("0", "") + "\n";
+						} else if (inputLine.startsWith("1")) {
+							formattedFile += "\f\n" + inputLine.replaceFirst("1", "") + "\n";
+						} else if (inputLine.startsWith("-")) {
+							formattedFile += "\n\n" + inputLine.replaceFirst("-", "") + "\n";
+						} else if (inputLine.startsWith(" ")) {
+							formattedFile += inputLine.replaceFirst(" ", "") + "\n";
+						} else {
+							formattedFile += inputLine + "\n";
+						}
 					}
+
+					fileInput.close();
+
+					// save formatted file
+					PrintWriter output = new PrintWriter(toFormatt);
+					output.print(formattedFile);
+					output.flush();
+					output.close();
+
+					log("File has been downloaded and saved to:\n" + toFormatt.getAbsolutePath());
+
+					// Let the user know its done with alert
+					Stage alertStage = new Stage();
+					FXMLLoader fxmlLoader = new FXMLLoader();
+					AnchorPane newPane = fxmlLoader
+							.load(getClass().getClassLoader().getResource("fxml/OK.fxml").openStream());
+					CompletedController controller = fxmlLoader.getController();
+					controller.setStage(alertStage);
+					alertStage.setTitle("Alert");
+					Scene newScene = new Scene(newPane);
+					alertStage.setResizable(false);
+					alertStage.setScene(newScene);
+					alertStage.show();
+
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				
-				fileInput.close();
-				
-				PrintWriter output = new PrintWriter(toFormatt);
-				output.print(formattedFile);
-				output.flush();
-				output.close();
-				
-				log("File has been downloaded and saved to:\n" + toFormatt.getAbsolutePath());
-				
-				Stage alertStage = new Stage();
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				AnchorPane newPane = fxmlLoader
-						.load(getClass().getClassLoader().getResource("fxml/OK.fxml").openStream());
-				CompletedController controller = fxmlLoader.getController();
-				controller.setStage(alertStage);
-				alertStage.setTitle("Alert");
-				Scene newScene = new Scene(newPane);
-				alertStage.setResizable(false);
-				alertStage.setScene(newScene);
-				alertStage.show();
-				
-			} catch (IOException e) {
-				e.printStackTrace();
+			} else {
+				log("You must click on a job before you try to download and format it");
 			}
-    		} else {
-    			log("You must click on a job before you try to download and format it");
-    		}
 		} else {
 			log("Cannot download job: You are not logged in!");
 		}
-    }
+	}
 
 	private void log(String message) {
 		logVBox.getChildren().add(new Label(message));
