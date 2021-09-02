@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  * Marist output catcher connects to the Marist file server,
  * downloads selected jobs, and formats them for submission
  * @author Ben Shabowski
+ * @since 1.0
  *
  */
 public class App extends Application {
