@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -248,19 +249,23 @@ public class MaristController {
 					output.close();
 
 					log("File has been downloaded and saved to:\n" + toFormatt.getAbsolutePath());
-
-					// Let the user know its done with alert
-					Stage alertStage = new Stage();
-					FXMLLoader fxmlLoader = new FXMLLoader();
-					AnchorPane newPane = fxmlLoader
-							.load(getClass().getClassLoader().getResource("fxml/OK.fxml").openStream());
-					CompletedController controller = fxmlLoader.getController();
-					controller.setStage(alertStage);
-					alertStage.setTitle("Alert");
-					Scene newScene = new Scene(newPane);
-					alertStage.setResizable(false);
-					alertStage.setScene(newScene);
-					alertStage.show();
+					
+					try {
+						Desktop.getDesktop().open(toFormatt);
+					} catch(Exception e) {
+						// Let the user know its done with alert
+						Stage alertStage = new Stage();
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						AnchorPane newPane = fxmlLoader
+								.load(getClass().getClassLoader().getResource("fxml/OK.fxml").openStream());
+						CompletedController controller = fxmlLoader.getController();
+						controller.setStage(alertStage);
+						alertStage.setTitle("Alert");
+						Scene newScene = new Scene(newPane);
+						alertStage.setResizable(false);
+						alertStage.setScene(newScene);
+						alertStage.show();
+					}
 
 				} catch (IOException e) {
 					e.printStackTrace();
